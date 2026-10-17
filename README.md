@@ -19,3 +19,4 @@ Optional:
 - Frontend only: `npm run dev` (OTP will 404 unless you point `VITE_API_BASE_URL` to a deployed domain that has `/api/request-signup-otp`).
 - Full stack locally: run with `vercel dev` so `/api/*` functions work.
 
+testing the deployment
