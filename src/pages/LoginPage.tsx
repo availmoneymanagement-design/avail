@@ -4,11 +4,11 @@ import { supabase } from "@/lib/supabaseClient";
 import { t } from "@/lib/translations";
 import { requestSignupOtp } from "@/lib/signupOtp";
 import { setPendingSignupOtpEmail } from "@/lib/signupOtpPending";
-import { Mail, Lock, Eye, EyeOff, User, Calendar } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, User, Calendar, ArrowLeft } from "lucide-react";
 import TopAccent from "@/components/TopAccent";
 import { getPendingInvite } from "@/lib/pendingInvite";
 
-const LoginPage = () => {
+const LoginPage = ({ onBack }: { onBack?: () => void }) => {
   const { language, setLanguage, authState, setAuthState, setUserName, setUserAge, setUserEmail } = useApp();
   const tr = t[language];
   const [isSignup, setIsSignup] = useState(authState === "signup");
@@ -128,6 +128,11 @@ const LoginPage = () => {
       <TopAccent />
       <div className="flex-1 flex items-center justify-center p-4">
       <div className="w-full max-w-sm animate-fade-in">
+        {onBack && (
+          <button onClick={onBack} className="mb-2 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition">
+            <ArrowLeft className="h-4 w-4" /> {tr.back}
+          </button>
+        )}
         {/* Logo & Brand */}
         <div className="mb-6">
           <div className="text-center">

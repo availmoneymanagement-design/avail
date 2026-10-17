@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppProvider, useApp } from "@/contexts/AppContext";
+import LandingPage from "@/pages/LandingPage";
 import LoginPage from "@/pages/LoginPage";
 import OtpPage from "@/pages/OtpPage";
 import InvitePage from "@/pages/InvitePage";
@@ -26,6 +28,7 @@ import InsightsPage from "@/pages/personal/InsightsPage";
 import FriendsPage from "@/pages/personal/FriendsPage";
 import SettingsPage from "@/pages/SettingsPage";
 import NotFound from "@/pages/NotFound";
+import { getPendingInvite } from "@/lib/pendingInvite";
 
 const queryClient = new QueryClient();
 
@@ -54,7 +57,9 @@ const AuthedApp = ({ mode }: { mode: "business" | "personal" }) => {
 };
 
 const AppContent = () => {
-  const { authState, mode, booting, profile, session } = useApp();
+  const { authState, setAuthState, mode, booting, profile, session } = useApp();
+  // Signed-out visitors see the landing page first; invite links skip straight to signup.
+  const [showLanding, setShowLanding] = useState(() => !getPendingInvite());
 
   if (booting) {
     return (
@@ -73,7 +78,28 @@ const AppContent = () => {
     return <AuthedApp mode={mode} />;
   }
 
-  if (authState === "login" || authState === "signup") return <LoginPage />;
+  if (authState === "login" && showLanding) {
+    return (
+      <LandingPage
+        onLogin={() => setShowLanding(false)}
+        onSignup={() => {
+          setShowLanding(false);
+          setAuthState("signup");
+        }}
+      />
+    );
+  }
+
+  if (authState === "login" || authState === "signup") {
+    return (
+      <LoginPage
+        onBack={() => {
+          setAuthState("login");
+          setShowLanding(true);
+        }}
+      />
+    );
+  }
   if (authState === "signup-otp") return <OtpPage />;
   if (authState === "signup-terms") return <TermsPage />;
   if (authState === "select-type") return <AccountTypeSelect />;
