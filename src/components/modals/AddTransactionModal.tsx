@@ -4,6 +4,7 @@ import { t } from "@/lib/translations";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { db, type BusinessCustomerRow, type BusinessSupplierRow, type BusinessTransactionRow } from "@/lib/db";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 interface Props {
   open: boolean;
@@ -105,7 +106,7 @@ const AddTransactionModal = ({
 	            <button type="button" onClick={() => setType("out")} className={`flex-1 py-2 text-sm font-medium ${type === "out" ? "bg-money-out text-money-out-foreground" : "text-muted-foreground"}`}>{tr.moneyOut}</button>
 	          </div>
 	          <input type="number" placeholder={`Amount (${currencySymbol})`} value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" required />
-	          <input placeholder="Description" value={desc} onChange={(e) => setDesc(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" required />
+	          <VoiceInput placeholder="Description" value={desc} onValueChange={setDesc} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" required />
 	          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
 	          <button disabled={saving} type="submit" className="w-full bg-primary text-primary-foreground py-2.5 text-sm font-medium hover:opacity-90 disabled:opacity-60">
 	            {saving ? "Saving…" : tr.addTransaction}

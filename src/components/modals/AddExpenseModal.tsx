@@ -3,6 +3,7 @@ import { useApp } from "@/contexts/AppContext";
 import { t } from "@/lib/translations";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 export type ExpenseDraft = {
   amount: number;
@@ -58,7 +59,7 @@ const AddExpenseModal = ({ open, onClose, type = "business", onAddExpense }: Pro
             <option value="">Select Category</option>
             {categories.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
-          <input placeholder="Description" value={desc} onChange={(e) => setDesc(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+          <VoiceInput placeholder="Description" value={desc} onValueChange={setDesc} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
           <button type="submit" className="w-full bg-primary text-primary-foreground py-2.5 text-sm font-medium hover:opacity-90">{tr.addExpense}</button>
         </form>

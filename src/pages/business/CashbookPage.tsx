@@ -7,6 +7,7 @@ import { db, type BusinessTransactionRow } from "@/lib/db";
 import { subscribeDataChanged } from "@/lib/events";
 import PageHeader from "@/components/PageHeader";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 const CashbookPage = () => {
   const { language, session, businessUserId } = useApp();
@@ -97,9 +98,10 @@ const CashbookPage = () => {
         <div className="flex-1 min-w-[160px]">
           <div className="relative">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <input
+            <VoiceInput
+              voiceMode="replace"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onValueChange={setSearch}
               placeholder={tr.searchPlaceholder}
               className="w-full pl-10 pr-4 py-2 border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />

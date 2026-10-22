@@ -8,6 +8,7 @@ import { db, type BusinessEmployeeRow } from "@/lib/db";
 import { subscribeDataChanged } from "@/lib/events";
 import PageHeader from "@/components/PageHeader";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 const EmployeesPage = () => {
   const { language, session, businessUserId } = useApp();
@@ -98,7 +99,7 @@ const EmployeesPage = () => {
         <div className="p-3 bg-card border-b border-border">
           <div className="relative">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder={`${tr.search} ${tr.employees.toLowerCase()}`}
+            <VoiceInput voiceMode="replace" value={search} onValueChange={setSearch} placeholder={`${tr.search} ${tr.employees.toLowerCase()}`}
               className="w-full pl-10 pr-4 py-2 border border-input bg-background text-base focus:outline-none focus:ring-2 focus:ring-ring" />
           </div>
         </div>

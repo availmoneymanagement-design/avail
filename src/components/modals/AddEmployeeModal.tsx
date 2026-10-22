@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { db, type BusinessEmployeeRow } from "@/lib/db";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 interface Props {
   open: boolean;
@@ -116,10 +117,10 @@ const AddEmployeeModal = ({ open, onClose, userId, onAdded }: Props) => {
           <DialogDescription>Invite a new team member and set their salary.</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
+          <VoiceInput
             placeholder="Employee name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onValueChange={setName}
             className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             required
           />

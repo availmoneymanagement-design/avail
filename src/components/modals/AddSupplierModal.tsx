@@ -4,6 +4,7 @@ import { t } from "@/lib/translations";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { db, type BusinessSupplierRow } from "@/lib/db";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 interface Props {
   open: boolean;
@@ -54,7 +55,7 @@ const AddSupplierModal = ({ open, onClose, userId, onAdded }: Props) => {
           <DialogDescription>Add a new supplier to your ledger</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input placeholder="Supplier Name" value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" required />
+          <VoiceInput placeholder="Supplier Name" value={name} onValueChange={setName} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" required />
           <input placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" required />
           <input type="email" placeholder="Email (optional)" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
           <div className="flex gap-3">

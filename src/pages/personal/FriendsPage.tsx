@@ -9,6 +9,7 @@ import { db, type PersonalFriendEntryRow, type PersonalFriendRow } from "@/lib/d
 import { subscribeDataChanged } from "@/lib/events";
 import PageHeader from "@/components/PageHeader";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 const FriendsPage = () => {
   const { language, session, userName } = useApp();
@@ -274,9 +275,9 @@ const FriendsPage = () => {
             <DialogDescription>{tr.addFriendDesc}</DialogDescription>
           </DialogHeader>
           <form onSubmit={handleAddFriend} className="space-y-3">
-            <input
+            <VoiceInput
               value={friendName}
-              onChange={(e) => setFriendName(e.target.value)}
+              onValueChange={setFriendName}
               placeholder={tr.friendName}
               className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               required
@@ -332,9 +333,9 @@ const FriendsPage = () => {
               required
               min={1}
             />
-            <input
+            <VoiceInput
               value={note}
-              onChange={(e) => setNote(e.target.value)}
+              onValueChange={setNote}
               placeholder={tr.noteOptional}
               className="w-full border border-input bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />

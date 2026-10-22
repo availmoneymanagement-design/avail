@@ -7,6 +7,7 @@ import { setPendingSignupOtpEmail } from "@/lib/signupOtpPending";
 import { Mail, Lock, Eye, EyeOff, User, Calendar, ArrowLeft } from "lucide-react";
 import TopAccent from "@/components/TopAccent";
 import { getPendingInvite } from "@/lib/pendingInvite";
+import VoiceInput from "@/components/VoiceInput";
 
 const LoginPage = ({ onBack }: { onBack?: () => void }) => {
   const { language, setLanguage, authState, setAuthState, setUserName, setUserAge, setUserEmail } = useApp();
@@ -183,7 +184,7 @@ const LoginPage = ({ onBack }: { onBack?: () => void }) => {
                 <>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <input type="text" placeholder={tr.name} value={name} onChange={(e) => setName(e.target.value)}
+                    <VoiceInput type="text" placeholder={tr.name} value={name} onValueChange={setName}
                       className="w-full pl-10 pr-4 py-2.5 border border-input bg-background text-base focus:outline-none focus:ring-2 focus:ring-ring" required />
                   </div>
                   <div className="relative">

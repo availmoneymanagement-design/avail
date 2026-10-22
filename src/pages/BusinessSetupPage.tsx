@@ -3,6 +3,7 @@ import { useApp } from "@/contexts/AppContext";
 import { t } from "@/lib/translations";
 import { Building2, UserCircle, Mail, Plus, X } from "lucide-react";
 import TopAccent from "@/components/TopAccent";
+import VoiceInput from "@/components/VoiceInput";
 
 const BusinessSetupPage = () => {
   const {
@@ -63,12 +64,12 @@ const BusinessSetupPage = () => {
         <div className="bg-card border border-border p-5 space-y-3">
           <div className="relative">
             <Building2 className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <input type="text" placeholder={tr.businessName} value={businessName} onChange={(e) => setBusinessName(e.target.value)}
+            <VoiceInput type="text" placeholder={tr.businessName} value={businessName} onValueChange={setBusinessName}
               className="w-full pl-10 pr-4 py-2.5 border border-input bg-background text-base focus:outline-none focus:ring-2 focus:ring-ring" required />
           </div>
           <div className="relative">
             <UserCircle className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <input type="text" placeholder={tr.ownerName} value={ownerName} onChange={(e) => setOwnerName(e.target.value)}
+            <VoiceInput type="text" placeholder={tr.ownerName} value={ownerName} onValueChange={setOwnerName}
               className="w-full pl-10 pr-4 py-2.5 border border-input bg-background text-base focus:outline-none focus:ring-2 focus:ring-ring" required />
           </div>
 

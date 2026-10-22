@@ -8,6 +8,7 @@ import { subscribeDataChanged } from "@/lib/events";
 import PageHeader from "@/components/PageHeader";
 import { Plus } from "lucide-react";
 import { useMoney } from "@/hooks/useMoney";
+import VoiceInput from "@/components/VoiceInput";
 
 type ModalMode = "add" | "edit";
 
@@ -210,10 +211,11 @@ const BudgetPage = () => {
             {modalMode === "add" && (
               <label className="text-xs font-semibold text-muted-foreground">
                 {tr.newBudgetCategory}
-                <input
+                <VoiceInput
                   value={modalCategory}
-                  onChange={(e) => setModalCategory(e.target.value)}
-                  className="w-full mt-1 border border-input px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                  onValueChange={setModalCategory}
+                  wrapperClassName="mt-1 font-normal"
+                  className="w-full border border-input px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                   placeholder={tr.categoryPlaceholder}
                   required
                 />
